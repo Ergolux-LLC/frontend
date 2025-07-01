@@ -1,0 +1,57 @@
+/***********  Twilio Voice Client styles  ***********/
+
+/* Volume bars */
+#volume-indicators {
+    margin-top: 0.75rem;
+}
+
+
+
+/* Incoming call card */
+#incoming-call {
+    margin-top: 1rem;
+}
+
+/* Log area */
+pre#log {
+    height: 200px;
+    overflow-y: auto;
+}
+
+/* Utility classes */
+.hide {
+    display: none !important;
+}
+
+/* Startup toggle colour when checked */
+#startup-toggle:checked {
+    background-color: #198754;
+    /* Bootstrap success */
+    border-color: #198754;
+}
+
+#startup-toggle:checked:focus {
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* Colour classes applied by JS for OFF / PENDING / READY */
+.form-switch .form-check-input.state-off {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+}
+
+.form-switch .form-check-input.state-pending {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25) !important;
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+}
+
+.form-switch .form-check-input.state-ready {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "from_twilio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 80",
+    "build": "vite build",
+    "serve": "vite preview --host"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@twilio/voice-sdk": "^2.13.0",
+    "lit": "^3.3.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
