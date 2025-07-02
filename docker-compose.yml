@@ -1,5 +1,0 @@
-services:
-  frontend:
-    image: ghcr.io/ergolux-llc/frontend:latest
-    ports:
-      - "23455:80"
