@@ -3,9 +3,14 @@ services:
     build:
       context: ..
       dockerfile: deploy/Dockerfile
-    ports:
-      - "5173:5173"
     volumes:
       - ../app:/app
       - /app/node_modules
     working_dir: /app
+    expose:
+      - "5173"
+    networks:
+      - traefik_network
+networks:
+  traefik_network:
+    external: true

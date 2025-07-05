@@ -1,6 +1,6 @@
 // utils.js – helper functions for backend API interactions
 
-import { log, error } from './logger.js';
+import { log, error } from "./logger.js";
 
 /**
  * Retrieve an access token and issued identity from backend.
@@ -9,23 +9,32 @@ import { log, error } from './logger.js';
 export function fetchToken(identity) {
   log(`Requesting token for ${identity}`);
 
-  return fetch(`/backend/fenrir?identity=${encodeURIComponent(identity)}`)
-    .then(response => {
+  return fetch(
+    `http://app.ergolux.io.localhost/api/twilio/utility/fenrir?identity=${encodeURIComponent(
+      identity
+    )}`
+  )
+    .then(async (response) => {
+      const text = await response.text();
+
       if (!response.ok) {
-        const msg = `Token fetch failed: ${response.status}`;
-        error(msg);
-        throw new Error(msg);
+        error(`Token fetch failed (${response.status}): ${text}`);
+        throw new Error(`HTTP ${response.status}`);
       }
-      return response.json();
+
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        error(`Invalid JSON in response: ${text}`);
+        throw e;
+      }
     })
-    .then(data => {
+    .then((data) => {
       log(`Token received for ${data.identity}`);
       return { token: data.token, identity: data.identity };
     })
-    .catch(err => {
-      error(err.message || err);
+    .catch((err) => {
+      error(err.message || err.toString());
       throw err;
     });
 }
-
-// Additional backend calls can be added here following the same pattern

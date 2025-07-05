@@ -39,10 +39,10 @@ document.querySelector("form")?.addEventListener("submit", async (e) => {
       tokens?.access_token ? "✓" : "×"
     );
 
-    // Optional: also store access token in localStorage if needed
-    if (tokens?.access_token) {
-      localStorage.setItem("ergolux_token", tokens.access_token);
-    }
+    // // Optional: also store access token in localStorage if needed
+    // if (tokens?.access_token) {
+    //   localStorage.setItem("ergolux_token", tokens.access_token);
+    // }
 
     // Remove login UI
     const container = document.getElementById("login-container");
