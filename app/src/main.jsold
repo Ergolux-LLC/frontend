@@ -1,0 +1,64 @@
+// import "./login.js";
+// import "./packages/pageMaker/pageMaker.js";
+// import "./formSubmit.js";
+
+import "./packages/resourceLoader/resourceLoader.js";
+
+ResourceLoader.add("pageMaker", {
+  url: "/src/packages/pageMaker/pageMaker.js",
+  type: "script",
+  async: false,
+  module: true,
+});
+
+ResourceLoader.load(
+  "pageMaker",
+  function () {
+    console.log("[main] pageMaker.js has been downloaded.");
+    ResourceLoader.run("pageMaker");
+  },
+  1
+);
+
+// console.log("[main] Registering resource: testscript");
+
+// ResourceLoader.add("testscript", {
+//   url: "src/testscript.js",
+//   type: "script",
+//   async: false,
+// });
+
+// console.log("[main] Registering resource: backgroundVideo");
+
+// ResourceLoader.add("backgroundVideo", {
+//   url: "/video/background.mp4",
+//   type: "binary",
+// });
+
+// console.log("[main] Queuing resource load: testscript (priority 1)");
+// ResourceLoader.load(
+//   "testscript",
+//   function () {
+//     console.log("[main] testscript.js has been downloaded.");
+//     console.log("[main] Running testscript.js");
+//     ResourceLoader.run("testscript");
+//   },
+//   1
+// );
+
+// console.log("[main] Queuing resource load: backgroundVideo (priority 10)");
+// ResourceLoader.load(
+//   "backgroundVideo",
+//   function (data) {
+//     console.log("[main] background.mp4 has been downloaded.");
+//     const video = document.getElementById("bg-video");
+//     if (video) {
+//       video.src = "/video/background.mp4";
+//       video.load();
+//       console.log("[main] background.mp4 assigned to #bg-video");
+//     } else {
+//       console.warn("[main] #bg-video element not found");
+//     }
+//   },
+//   10
+// );

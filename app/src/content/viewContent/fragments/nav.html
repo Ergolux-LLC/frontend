@@ -1,0 +1,109 @@
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary px-3"
+>
+  <!-- brand -->
+  <a
+    class="navbar-brand fw-bold text-light"
+    href="/dashboard"
+    data-page="dashboard"
+  >
+    <i class="bi bi-kanban-fill me-2 text-primary"></i>Ergolux
+  </a>
+
+  <!-- burger -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#mainNav"
+    aria-controls="mainNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- main links -->
+  <div class="collapse navbar-collapse" id="mainNav">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard" data-page="dashboard">
+          <i class="bi bi-speedometer2 me-1"></i>Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/crm" data-page="crm">
+          <i class="bi bi-people-fill me-1"></i>CRM
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/forms" data-page="forms">
+          <i class="bi bi-ui-checks-grid me-1"></i>Forms
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link text-monospace text-danger opacity-75"
+          href="/labs"
+          data-page="labs"
+        >
+          <i class="bi bi-terminal me-1"></i>D15A8L3D
+        </a>
+      </li>
+    </ul>
+
+    <!-- account menu -->
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle text-light"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="bi bi-person-circle me-1"></i>Agent
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+          <li>
+            <a
+              class="dropdown-item"
+              href="/profile"
+              data-page="profile"
+              id="profileLink"
+            >
+              <i class="bi bi-person me-1"></i>Profile
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/settings"
+              data-page="settings"
+              id="settingsLink"
+            >
+              <i class="bi bi-gear me-1"></i>Settings
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="/help"
+              data-page="help"
+              id="helpLink"
+            >
+              <i class="bi bi-question-circle me-1"></i>Help
+            </a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item text-danger" href="#" id="logoutLink">
+              <i class="bi bi-box-arrow-right me-1"></i>Logout
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

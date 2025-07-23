@@ -1,0 +1,146 @@
+<video
+  id="background-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  "
+  data-src="/video/background.mp4"
+></video>
+
+<div
+  class="center-screen"
+  style="
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  "
+>
+  <div
+    class="login-card"
+    id="login-container"
+    style="
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 0.75rem;
+      padding: 2rem 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.75);
+    "
+  >
+    <div
+      class="text-center mb-4"
+      style="text-align: center; margin-bottom: 1.5rem"
+    >
+      <div style="font-size: 2.5rem; color: #0d6efd">🔒</div>
+      <h2 style="font-weight: 600; font-size: 1.75rem; margin-bottom: 0.25rem">
+        Ergolux Voice
+      </h2>
+      <small style="color: #bbb">Agent Login</small>
+    </div>
+
+    <form id="loginForm">
+      <label
+        for="username"
+        style="
+          margin-top: 1rem;
+          display: block;
+          font-size: 0.875rem;
+          margin-bottom: 0.25rem;
+        "
+        >Username</label
+      >
+      <input
+        type="text"
+        id="username"
+        placeholder="Enter your username"
+        autocomplete="username"
+        value="testuser+d288ee12@example.com"
+        style="
+          background-color: #121212;
+          color: #fff;
+          border: 1px solid #444;
+          width: 100%;
+          padding: 0.5rem 0.75rem;
+          border-radius: 0.375rem;
+          font-size: 1rem;
+        "
+      />
+
+      <label
+        for="password"
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-top: 1rem;
+          font-size: 0.875rem;
+          margin-bottom: 0.25rem;
+        "
+      >
+        <span>Password</span>
+        <a
+          href="#"
+          style="color: #0d6efd; text-decoration: none; font-size: 0.875rem"
+          >Forgot?</a
+        >
+      </label>
+      <input
+        type="password"
+        id="password"
+        placeholder="••••••••"
+        autocomplete="current-password"
+        value="strongpassword123"
+        style="
+          background-color: #121212;
+          color: #fff;
+          border: 1px solid #444;
+          width: 100%;
+          padding: 0.5rem 0.75rem;
+          border-radius: 0.375rem;
+          font-size: 1rem;
+        "
+      />
+
+      <button
+        type="submit"
+        class="btn"
+        style="
+          margin-top: 1.5rem;
+          background-color: #0d6efd;
+          border: none;
+          padding: 0.6rem 1rem;
+          color: white;
+          width: 100%;
+          font-size: 1rem;
+          border-radius: 0.375rem;
+          cursor: pointer;
+        "
+      >
+        Log In
+      </button>
+    </form>
+
+    <div
+      class="text-center mt-4"
+      style="text-align: center; margin-top: 1.5rem"
+    >
+      <small style="color: #bbb">Don't have an account?</small><br />
+      <a
+        href="#"
+        style="color: #0d6efd; text-decoration: none; font-size: 0.875rem"
+        >Request Access</a
+      >
+    </div>
+  </div>
+</div>

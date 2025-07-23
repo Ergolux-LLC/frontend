@@ -1,0 +1,196 @@
+<div class="container-fluid">
+  <div class="row mb-4 justify-content-center">
+    <div class="col-auto text-center">
+      <h1 class="fw-semibold">Add New Lead</h1>
+      <p class="text-secondary">
+        Enter agent details to evaluate lead quality and prioritize outreach.
+      </p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      <div class="card text-bg-dark border-secondary shadow-sm">
+        <div class="card-body">
+          <form class="bg-dark text-light p-4 rounded">
+            <div class="row g-3">
+              <div class="col-6 col-lg-4">
+                <label for="agentFirstName" class="form-label"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control bg-secondary text-light"
+                  id="agentFirstName"
+                  name="agentFirstName"
+                  required
+                  value="John"
+                />
+              </div>
+              <div class="col-6 col-lg-4">
+                <label for="agentLastName" class="form-label">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control bg-secondary text-light"
+                  id="agentLastName"
+                  name="agentLastName"
+                  required
+                  value="Doe"
+                />
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label"
+                  >Closed Transactions (Last 12 Months)</label
+                >
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="transactions"
+                >
+                  <option value="under_12" selected>&lt; 12</option>
+                  <option value="12_to_23">12–23</option>
+                  <option value="24_to_35">24–35</option>
+                  <option value="36_plus">36+</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Active Listings</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="activeListings"
+                >
+                  <option value="0">0</option>
+                  <option value="1_to_2" selected>1–2</option>
+                  <option value="3_to_4">3–4</option>
+                  <option value="5_plus">5+</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Team Size</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="teamSize"
+                >
+                  <option value="solo" selected>Solo</option>
+                  <option value="2">2</option>
+                  <option value="3_to_4">3–4</option>
+                  <option value="5_plus">5+</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Role</label>
+                <select class="form-select bg-secondary text-light" name="role">
+                  <option value="agent" selected>Agent</option>
+                  <option value="senior_agent">Senior Agent</option>
+                  <option value="team_lead">Team Lead</option>
+                  <option value="owner_partner">Owner/Partner</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Average Listing Price</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="listingPrice"
+                >
+                  <option value="under_400k" selected>&lt; $400K</option>
+                  <option value="400k_to_499k">$400K–$499K</option>
+                  <option value="500k_to_749k">$500K–$749K</option>
+                  <option value="750k_plus">$750K+</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Years Licensed</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="licenseTenure"
+                >
+                  <option value="under_2">&lt; 2 years</option>
+                  <option value="2_to_3">2–3 years</option>
+                  <option value="4_to_6" selected>4–6 years</option>
+                  <option value="7_plus">7+ years</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Has Website</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="website"
+                >
+                  <option value="none">None</option>
+                  <option value="broker_subpage" selected>
+                    Broker Subpage
+                  </option>
+                  <option value="personal_idx">Personal IDX Site</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label"
+                  >Social Media Activity (Last 30 Days)</label
+                >
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="social"
+                >
+                  <option value="no">No</option>
+                  <option value="yes" selected>Yes</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Specialization</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="specialization"
+                >
+                  <option value="none">No specific focus</option>
+                  <option value="buyers_primary" selected>
+                    Primarily buyers (70%+ of transactions)
+                  </option>
+                  <option value="listings_primary">
+                    Primarily listings/relocation (70%+ of transactions)
+                  </option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Market Geography</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="geography"
+                >
+                  <option value="low_volume">Low-volume market</option>
+                  <option value="high_volume" selected>
+                    High-volume / Metro market
+                  </option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">License Status</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="licenseStatus"
+                >
+                  <option value="inactive">Inactive or Expired</option>
+                  <option value="active" selected>Active</option>
+                </select>
+              </div>
+              <div class="col-6 col-lg-4">
+                <label class="form-label">Contact Info Available</label>
+                <select
+                  class="form-select bg-secondary text-light"
+                  name="contactInfo"
+                >
+                  <option value="none">None</option>
+                  <option value="one_method">
+                    One method (email or phone)
+                  </option>
+                  <option value="both" selected>Phone and Email</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-outline-light mt-4 col-12">
+              Submit Lead
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

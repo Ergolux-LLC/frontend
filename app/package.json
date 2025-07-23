@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 80",
-    "build": "vite build",
-    "serve": "vite preview --host"
+    "dev": "vite",
+    "dev:docker": "vite --mode docker",
+    "build": "vite build", 
+    "build:docker": "vite build --mode docker",
+    "build:cli": "vite build --mode cli",
+    "serve": "vite preview --mode docker --host",
+    "cli": "node dist/main.js",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -13,9 +18,13 @@
   "description": "",
   "dependencies": {
     "@twilio/voice-sdk": "^2.13.0",
-    "lit": "^3.3.0"
+    "lit": "^3.3.0",
+    "yaml": "^2.8.0"
   },
   "devDependencies": {
-    "vite": "^6.3.5"
+    "@vitest/ui": "^3.2.4",
+    "jsdom": "^26.1.0",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
   }
 }

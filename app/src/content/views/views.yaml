@@ -1,0 +1,71 @@
+# src/content/views/views.yaml
+#
+# after_scripts can contain either a scriptTag (defined in /content/scripts)
+# or any absolute URL.  The loader recognises *.css files and injects them
+# into <head>, so Bootstrap’s stylesheet must live in after_scripts when a
+# view actually needs the styles applied.
+#
+# preload.styles is optional: it tells the loader to start downloading early,
+# but it does NOT insert a <link>.  Duplicates are de‑deduped by the cache.
+
+views:
+  - view_name: "not_found"
+    view_type: "single"
+    page: "404.html"
+    requires_auth: false
+
+  - view_name: "login"
+    view_type: "single"
+    page: "login.html"
+    after_scripts:
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      - "login_script"
+    preload:
+      styles:                                   # (optional but keeps early pre‑fetch)
+        - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      images:
+        - "/img/image.png"
+        - "/video/background.mp4"
+    related_views:
+      - "dashboard"
+    requires_auth: false
+
+  - view_name: "dashboard"
+    view_type: "multi"
+    fragments:
+      - "nav.html"
+      - "dashboard.html"
+      - "footer.html"
+    after_scripts:
+      # ↓ CSS first (keeps look consistent even if JS fails)
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      - "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      # ↓ Chart.js CDN ➜ required by dashboard_charts_script
+      - "https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"
+      # ↓ local chart‑builder module (scriptTag registered in /content/scripts)
+      - "dashboard_charts_script"
+      # ↓ Bootstrap JS bundle for dropdowns etc.
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      # ↓ app‑specific nav / logout handlers
+      - "logout_script"
+      - "account_nav_script"
+    preload:
+      videos:
+        - "/video/testvideo.mp4"
+    requires_auth: true
+
+  - view_name: "crm"
+    view_type: "multi"
+    fragments:
+      - "nav.html"
+      - "crm.html"
+      - "footer.html"
+    after_scripts:
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      - "logout_script"
+      - "account_nav_script"
+    preload:
+      videos:
+        - "/video/testvideo.mp4"
+    requires_auth: true

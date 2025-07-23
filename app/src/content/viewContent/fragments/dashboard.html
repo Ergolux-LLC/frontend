@@ -1,0 +1,198 @@
+<!-- ===================================================================== -->
+<!--  Real‑Estate Sales Dashboard (Bootstrap 5 · Dark Theme)               -->
+<!--  ‑ clean markup  ‑ accessible  ‑ no inline JS (charts bootstrapped    -->
+<!--    separately by dashboard_charts_script)                            -->
+<!-- ===================================================================== -->
+<div class="container-fluid py-4">
+  <!-- ▒▒ HEADER ▒▒ -->
+  <header class="mb-4">
+    <h1 class="fw-semibold text-white mb-0">Sales Dashboard</h1>
+    <p class="text-secondary mb-0">
+      Track activity, manage prospects, and monitor performance across your
+      book of business.
+    </p>
+  </header>
+
+  <!-- ▒▒ KPI CARDS ▒▒ -->
+  <section class="row g-4 mb-4">
+    <article class="col-6 col-md-3">
+      <div class="card bg-dark border-secondary shadow-sm h-100 p-3">
+        <h6 class="text-light mb-1">Calls Today</h6>
+        <p class="display-6 fw-bold text-success mb-1">18</p>
+        <small class="text-muted"
+          >6 follow‑ups · 3 new leads · 9 unanswered</small
+        >
+      </div>
+    </article>
+
+    <article class="col-6 col-md-3">
+      <div class="card bg-dark border-secondary shadow-sm h-100 p-3">
+        <h6 class="text-light mb-1">Pipeline Value</h6>
+        <p class="display-6 fw-bold text-info mb-1">$ 78,450</p>
+        <small class="text-muted">Open opportunities (Q3)</small>
+      </div>
+    </article>
+
+    <article class="col-6 col-md-3">
+      <div class="card bg-dark border-secondary shadow-sm h-100 p-3">
+        <h6 class="text-light mb-1">Response Rate</h6>
+        <p class="display-6 fw-bold text-warning mb-1">67 %</p>
+        <small class="text-muted">Avg time to first reply 2 h 05 m</small>
+      </div>
+    </article>
+
+    <article class="col-6 col-md-3">
+      <div class="card bg-dark border-secondary shadow-sm h-100 p-3">
+        <h6 class="text-light mb-1">Deals Closed (30 d)</h6>
+        <p class="display-6 fw-bold text-primary mb-1">7</p>
+        <small class="text-muted">GCI $ 32,700</small>
+      </div>
+    </article>
+  </section>
+
+  <div class="row g-4">
+    <!-- ▒▒ RECENT INTERACTIONS ▒▒ -->
+    <section class="col-xl-7">
+      <div class="card bg-dark border-secondary shadow-sm h-100">
+        <div class="card-body d-flex flex-column">
+          <div
+            class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"
+          >
+            <h5 class="card-title text-light mb-0">
+              <i class="bi bi-clock-history me-1"></i>Recent Interactions
+            </h5>
+            <a href="#/interactions" class="btn btn-sm btn-outline-light"
+              >View All</a
+            >
+          </div>
+
+          <ul
+            class="list-group list-group-flush flex-grow-1 overflow-auto"
+            style="max-height: 22rem"
+          >
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between gap-2"
+            >
+              <div>
+                <strong>Sarah Jenkins</strong>
+                <span class="text-muted">· Keller Williams</span><br />
+                <small class="text-muted"
+                  >Follow‑up scheduled for tomorrow</small
+                >
+              </div>
+              <span
+                class="badge bg-success align-self-center"
+                title="Qualified opportunity"
+                >Qualified</span
+              >
+            </li>
+
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between gap-2"
+            >
+              <div>
+                <strong>Tom Rivera</strong>
+                <span class="text-muted">· Compass</span><br />
+                <small class="text-muted">Left voicemail 2 h ago</small>
+              </div>
+              <span
+                class="badge bg-warning text-dark align-self-center"
+                title="Awaiting response"
+                >Pending</span
+              >
+            </li>
+
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between gap-2"
+            >
+              <div>
+                <strong>Lisa Chen</strong>
+                <span class="text-muted">· eXp Realty</span><br />
+                <small class="text-muted">Sent pricing sheet</small>
+              </div>
+              <span class="badge bg-info text-dark align-self-center"
+                >Contacted</span
+              >
+            </li>
+
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between gap-2"
+            >
+              <div>
+                <strong>Andrew Holt</strong>
+                <span class="text-muted">· RE/MAX</span><br />
+                <small class="text-muted">Demo booked for next week</small>
+              </div>
+              <span class="badge bg-primary align-self-center">Demo</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▒▒ NEXT STEPS ▒▒ -->
+    <section class="col-xl-5">
+      <div class="card bg-dark border-secondary shadow-sm h-100">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-light mb-3">
+            <i class="bi bi-list-check me-1"></i>Next Steps
+          </h5>
+
+          <ul class="list-group list-group-flush flex-grow-1 overflow-auto">
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center gap-2"
+            >
+              <span>Call James Howard (Redfin)</span>
+              <button class="btn btn-sm btn-outline-success">Call</button>
+            </li>
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center gap-2"
+            >
+              <span>Send intro deck to Maria Alvarez</span>
+              <button class="btn btn-sm btn-outline-primary">Send</button>
+            </li>
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center gap-2"
+            >
+              <span>Log yesterday’s follow‑up (Lisa Chen)</span>
+              <button class="btn btn-sm btn-outline-light">Log</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ▒▒ CHARTS ▒▒ -->
+  <div class="row g-4 mt-4">
+    <section class="col-lg-6">
+      <div class="card bg-dark border-secondary shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-light mb-3">
+            <i class="bi bi-bar-chart-line me-1"></i>Weekly Calls vs Emails
+          </h5>
+          <canvas
+            id="callsEmailsChart"
+            height="200"
+            aria-label="Calls versus Emails chart"
+          ></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="col-lg-6">
+      <div class="card bg-dark border-secondary shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-light mb-3">
+            <i class="bi bi-graph-up-arrow me-1"></i>Pipeline Funnel
+          </h5>
+          <canvas
+            id="pipelineChart"
+            height="200"
+            aria-label="Pipeline funnel chart"
+          ></canvas>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

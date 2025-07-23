@@ -1,0 +1,127 @@
+import { SinglePageHtml, MultiSegmentHtml } from "../dynamicContent.js";
+
+const pages = {};
+const loading = {};
+let container = null; // Will hold the reference to the content element
+
+// Initializes and caches a page object
+async function definePage(name) {
+  console.log(`[renderer] definePage() called with name: "${name}"`);
+
+  if (pages[name]) {
+    console.log(`[renderer] Page "${name}" already defined, skipping`);
+    return;
+  }
+
+  if (loading[name]) {
+    console.log(`[renderer] Page "${name}" is currently loading`);
+    return loading[name];
+  }
+
+  console.log(`[renderer] Starting async definition for "${name}"`);
+  loading[name] = (async () => {
+    try {
+      switch (name) {
+        case "crm":
+          console.log(
+            `[renderer] Creating MultiSegmentHtml instance for "crm"`
+          );
+          const crm = new MultiSegmentHtml({
+            navigation: "nav",
+            content: "content",
+            footer: "footer",
+          });
+          await crm.init();
+          pages.crm = crm;
+          console.log(`[renderer] "crm" page initialized and cached`);
+          break;
+
+        case "login":
+          console.log(
+            `[renderer] Creating SinglePageHtml instance for "login"`
+          );
+          const login = new SinglePageHtml("login", "login");
+          await login.init();
+          pages.login = login;
+          console.log(`[renderer] "login" page initialized and cached`);
+          break;
+
+        default:
+          console.error(`[renderer] No definition for page: "${name}"`);
+          throw new Error(`No page definition for: ${name}`);
+      }
+    } catch (err) {
+      console.error(`[renderer] Error while defining page "${name}"`, err);
+      throw err;
+    }
+  })();
+
+  await loading[name];
+  console.log(`[renderer] Finished loading page "${name}"`);
+  delete loading[name];
+}
+
+async function renderPageByName(name) {
+  console.log(`[renderer] renderPageByName() called with name: "${name}"`);
+
+  if (!container) {
+    console.error(
+      "[renderer] No content container set. Call setupRenderer() first."
+    );
+    return;
+  }
+
+  try {
+    await definePage(name);
+    const page = pages[name];
+
+    if (!page) {
+      console.error(
+        `[renderer] Page "${name}" not found in cache after definition`
+      );
+      return;
+    }
+
+    if (typeof page.renderHtml !== "function") {
+      console.error(
+        `[renderer] Page "${name}" does not implement renderHtml()`
+      );
+      throw new Error("Page object is not initialized correctly.");
+    }
+
+    console.log(`[renderer] Rendering HTML for "${name}"`);
+    const html = await page.renderHtml();
+
+    container.innerHTML = html;
+    console.log(`[renderer] HTML content injected for page "${name}"`);
+  } catch (err) {
+    console.error(`[renderer] Failed to render page "${name}"`, err);
+    container.innerHTML = `<div class="error">Failed to load page</div>`;
+  }
+}
+
+// Export setup function
+export function setupRenderer(contentElement) {
+  console.log(`[renderer] setupRenderer() called`);
+
+  if (!contentElement) {
+    console.error("[renderer] No content element passed to setupRenderer");
+    return;
+  }
+
+  container = contentElement;
+
+  console.log(
+    "[renderer] Attaching 'render' event listener to content element"
+  );
+  contentElement.addEventListener("render", (e) => {
+    const { page } = e.detail || {};
+    console.log(`[renderer] Received 'render' event for page="${page}"`);
+
+    if (typeof page === "string") {
+      renderPageByName(page);
+    } else {
+      console.log("[renderer] Ignoring render event with invalid page");
+    }
+  });
+}

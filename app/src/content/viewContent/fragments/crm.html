@@ -1,0 +1,201 @@
+<div class="container-fluid py-4">
+  <!-- PAGE HEADER -------------------------------------------------------------->
+  <header class="mb-4">
+    <h1 class="fw-semibold text-white">Agent Workspace</h1>
+    <p class="text-secondary mb-0">
+      Stay focused. Handle tasks. Track follow‑ups. Add new leads.
+    </p>
+  </header>
+
+  <div class="row gy-4">
+    <!-- ── TODAY’S TASKS ───────────────────────────────────────────────────────-->
+    <section class="col-lg-6">
+      <div class="card bg-dark border-secondary shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-light">Today’s Tasks</h5>
+
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center"
+            >
+              <div>
+                Call <strong>Jessica Lane</strong><br />
+                <small class="text-muted">10:30 AM</small>
+              </div>
+              <button class="btn btn-sm btn-outline-success">Mark Done</button>
+            </li>
+
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center"
+            >
+              <div>
+                Email <strong>contract templates</strong><br />
+                <small class="text-muted">to Daniel Wright</small>
+              </div>
+              <button class="btn btn-sm btn-outline-success">Mark Done</button>
+            </li>
+
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center"
+            >
+              <div>Follow‑up with <strong>Maria Alvarez</strong></div>
+              <button class="btn btn-sm btn-outline-success">Mark Done</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ADD NEW LEAD ────────────────────────────────────────────────────────-->
+    <section class="col-lg-6">
+      <div class="card bg-dark border-secondary shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-light">Add New Lead</h5>
+
+          <form class="row g-3">
+            <div class="col-md-6">
+              <input
+                class="form-control form-control-sm bg-dark text-light border-secondary"
+                type="text"
+                placeholder="Full Name"
+              />
+            </div>
+
+            <div class="col-md-6">
+              <input
+                class="form-control form-control-sm bg-dark text-light border-secondary"
+                type="text"
+                placeholder="Brokerage"
+              />
+            </div>
+
+            <div class="col-12">
+              <input
+                class="form-control form-control-sm bg-dark text-light border-secondary"
+                type="email"
+                placeholder="Email Address"
+              />
+            </div>
+
+            <div class="col-12">
+              <input
+                class="form-control form-control-sm bg-dark text-light border-secondary"
+                type="tel"
+                placeholder="Phone Number"
+              />
+            </div>
+
+            <div class="col-12">
+              <textarea
+                class="form-control form-control-sm bg-dark text-light border-secondary"
+                rows="2"
+                placeholder="Notes…"
+              ></textarea>
+            </div>
+
+            <div class="col-12 text-end">
+              <button class="btn btn-primary btn-sm">Save Lead</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── AGENT STATUS ────────────────────────────────────────────────────────-->
+    <section class="col-lg-4">
+      <div class="card bg-dark border-secondary shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-light">Agent Status</h5>
+
+          <ul class="list-group list-group-flush mb-3">
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between"
+            >
+              Calls Today
+              <span class="fw-bold text-success">12</span>
+            </li>
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between"
+            >
+              Follow‑Ups Remaining
+              <span class="fw-bold text-warning">4</span>
+            </li>
+            <li
+              class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between"
+            >
+              Leads Contacted This Week
+              <span class="fw-bold text-info">38</span>
+            </li>
+          </ul>
+
+          <button class="btn btn-outline-light btn-sm w-100">
+            View Detailed Report
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LEAD QUEUE ──────────────────────────────────────────────────────────-->
+    <section class="col-lg-8">
+      <div class="card bg-dark border-secondary shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-light mb-3">Lead Queue</h5>
+
+          <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle mb-0">
+              <thead class="table-light text-dark">
+                <tr>
+                  <th style="width: 25%">Name</th>
+                  <th style="width: 20%">Brokerage</th>
+                  <th style="width: 20%">Status</th>
+                  <th style="width: 20%">Last Contact</th>
+                  <th style="width: 15%" class="text-end">
+                    <i class="bi bi-eye"></i>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Tom Rivera</td>
+                  <td>RE/MAX</td>
+                  <td>
+                    <span class="badge bg-warning text-dark"
+                      >Needs Follow‑Up</span
+                    >
+                  </td>
+                  <td>Yesterday</td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-light">View</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Lisa Chen</td>
+                  <td>Compass</td>
+                  <td>
+                    <span class="badge bg-info text-dark">Contacted</span>
+                  </td>
+                  <td>3 days ago</td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-light">View</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Andrew Holt</td>
+                  <td>eXp Realty</td>
+                  <td><span class="badge bg-secondary">New</span></td>
+                  <td>—</td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-light">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-console.log("[login.js] Loaded login module");
+console.log("[login.js] OLD Loaded login module");
 
 document.querySelector("form")?.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -22,7 +22,7 @@ document.querySelector("form")?.addEventListener("submit", async (e) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: formData.toString(),
-      credentials: "include", // allow cookies to be set
+      credentials: "include",
     });
 
     if (!res.ok) {
