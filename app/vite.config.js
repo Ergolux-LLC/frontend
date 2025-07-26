@@ -3,16 +3,25 @@ import path from "path";
 
 export default defineConfig({
   root: __dirname,
+  publicDir: "public",
   server: {
     host: true,
     port: 5173,
+    strictPort: true,
     allowedHosts: ["app.ergolux.io.localhost"],
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true,
+      htmlAcceptHeaders: ["text/html"],
+    },
     proxy: {
       "/api": {
         target: "http://app.ergolux.io.localhost",
         changeOrigin: true,
       },
+    },
+    watch: {
+      usePolling: true,
+      interval: 100,
     },
   },
   resolve: {

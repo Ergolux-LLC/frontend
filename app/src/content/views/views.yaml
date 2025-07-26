@@ -61,11 +61,58 @@ views:
       - "crm.html"
       - "footer.html"
     after_scripts:
-      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       - "logout_script"
       - "account_nav_script"
     preload:
+      styles:
+        - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       videos:
         - "/video/testvideo.mp4"
     requires_auth: true
+
+  - view_name: "transactions"
+    view_type: "multi"
+    fragments: 
+      - "nav.html"
+      - "transactions.html"
+      - "footer.html"
+    after_scripts:
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      - "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+
+    preload:
+      styles:
+        - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        - "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+
+  - view_name: "university"
+    view_type: "multi"
+    fragments: 
+      - "nav.html"
+      - "university.html"
+      - "footer.html"
+    after_scripts:
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      - "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+
+    preload:
+      styles:
+        - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        - "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+
+  - view_name: "uploads"
+    view_type: "multi"
+    fragments: 
+      - "nav.html"
+      - "uploads.html"
+      - "footer.html"
+    after_scripts:
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      - "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      - "https://unpkg.com/@uppy/core@4.4.7/dist/style.css"
+      - "https://unpkg.com/@uppy/dashboard@4.3.4/dist/style.css"
+      - "account_nav_script"
+      - "upload_script"

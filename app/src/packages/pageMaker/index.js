@@ -1,3 +1,7 @@
+import Uppy from "@uppy/core";
+import Dashboard from "@uppy/dashboard";
+import XHRUpload from "@uppy/xhr-upload";
+
 import { initializePage } from "./initialize/index.js";
 import { startPageChange } from "./pageChange.js";
 import { setupRenderer } from "./renderer/index.js";

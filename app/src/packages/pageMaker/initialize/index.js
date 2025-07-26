@@ -10,7 +10,7 @@
  */
 
 import rawHeadHTML from "@content/head.html?raw";
-import preContent from "@content/preContent.html?raw";
+// import preContent from "@content/preContent.html?raw";
 import postContent from "@content/postContent.html?raw";
 
 export function initializePage() {
@@ -28,8 +28,7 @@ export function initializePage() {
    *  <body> – build the shell but DO NOT create a nested <body>
    * ---------------------------------------------------------------------- */
   const shell = `
-${preContent.trim()}
-<div id="content"></div>
+<main class="flex-grow-1"><div id="content" style="display: flex; flex-direction: column; min-height:100%;"></div></main>
 ${postContent.trim()}
 `.trim();
 

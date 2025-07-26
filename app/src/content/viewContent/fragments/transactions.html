@@ -1,0 +1,189 @@
+<div class="container-fluid py-5 bg-dark text-white px-3 px-md-5">
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4"
+  >
+    <h1 class="h3 m-0">My Transactions</h1>
+    <button class="btn btn-outline-light btn-sm">+ Add New Transaction</button>
+  </div>
+
+  <div
+    class="text-center py-5 border border-secondary rounded"
+    id="no-transactions"
+    style="display: none"
+  >
+    <p class="mb-2">You have no transactions in the system.</p>
+    <button class="btn btn-primary btn-sm">Add Your First Transaction</button>
+  </div>
+
+  <div id="transactions-table">
+    <div class="table-responsive d-none d-md-block">
+      <table
+        class="table table-dark table-hover table-bordered align-middle mb-0 w-100"
+      >
+        <thead class="table-secondary text-dark">
+          <tr>
+            <th>Property</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Client</th>
+            <th>Commission</th>
+            <th>Close Date</th>
+            <th>Phase</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="fw-bold">1234 Ocean View Dr</div>
+              <small class="text-muted">Malibu, CA 90265</small>
+            </td>
+            <td><span class="badge bg-success">Closed</span></td>
+            <td>Listing</td>
+            <td>Jane Smith</td>
+            <td>$45,000</td>
+            <td>2025-07-15</td>
+            <td>Closing</td>
+            <td>
+              <div
+                class="d-flex flex-column flex-sm-row flex-wrap align-items-start gap-1"
+              >
+                <span
+                  class="text-warning small d-flex align-items-center me-sm-2"
+                >
+                  <i class="bi bi-exclamation-triangle me-1"></i>Action Required
+                </span>
+                <button class="btn btn-outline-light btn-sm">View</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="fw-bold">8827 Mountain Laurel Way</div>
+              <small class="text-muted">Denver, CO 80238</small>
+            </td>
+            <td><span class="badge bg-warning text-dark">Pending</span></td>
+            <td>Buyer</td>
+            <td>Michael Torres</td>
+            <td>$28,500</td>
+            <td>2025-08-03</td>
+            <td>Offer Negotiation</td>
+            <td>
+              <div
+                class="d-flex flex-column flex-sm-row flex-wrap align-items-start gap-1"
+              >
+                <span
+                  class="text-muted small d-flex align-items-center me-sm-2"
+                >
+                  <i class="bi bi-info-circle me-1"></i>No actions
+                </span>
+                <button class="btn btn-outline-light btn-sm">View</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="fw-bold">51 Elm Street</div>
+              <small class="text-muted">Austin, TX 73301</small>
+            </td>
+            <td><span class="badge bg-info text-dark">Active</span></td>
+            <td>Listing</td>
+            <td>Ava Patel</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Marketing</td>
+            <td>
+              <div
+                class="d-flex flex-column flex-sm-row flex-wrap align-items-start gap-1"
+              >
+                <span
+                  class="text-warning small d-flex align-items-center me-sm-2"
+                >
+                  <i class="bi bi-exclamation-triangle me-1"></i>Add description
+                </span>
+                <button class="btn btn-outline-light btn-sm">View</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile stacked layout -->
+    <div class="d-md-none">
+      <div
+        class="border border-secondary rounded mb-3 p-3 bg-body-tertiary bg-dark text-white"
+      >
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-bold">1234 Ocean View Dr</div>
+          <span class="badge bg-success">Closed</span>
+        </div>
+        <small class="text-muted d-block mb-2">Malibu, CA 90265</small>
+        <div><strong>Phase:</strong> Closing</div>
+        <div><strong>Type:</strong> Listing</div>
+        <div><strong>Client:</strong> Jane Smith</div>
+        <div><strong>Commission:</strong> $45,000</div>
+        <div><strong>Close Date:</strong> 2025-07-15</div>
+        <div class="text-warning mt-2 d-flex align-items-center">
+          <i class="bi bi-exclamation-triangle me-2"></i>Action Required: Upload
+          final contract
+        </div>
+        <div class="mt-3">
+          <button class="btn btn-outline-light btn-sm">View</button>
+        </div>
+      </div>
+
+      <div
+        class="border border-secondary rounded mb-3 p-3 bg-body-tertiary bg-dark text-white"
+      >
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-bold">8827 Mountain Laurel Way</div>
+          <span class="badge bg-warning text-dark">Pending</span>
+        </div>
+        <small class="text-muted d-block mb-2">Denver, CO 80238</small>
+        <div><strong>Phase:</strong> Offer Negotiation</div>
+        <div><strong>Type:</strong> Buyer</div>
+        <div><strong>Client:</strong> Michael Torres</div>
+        <div><strong>Commission:</strong> $28,500</div>
+        <div><strong>Close Date:</strong> 2025-08-03</div>
+        <div class="text-muted mt-2 d-flex align-items-center">
+          <i class="bi bi-info-circle me-2"></i>No outstanding actions
+        </div>
+        <div class="mt-3">
+          <button class="btn btn-outline-light btn-sm">View</button>
+        </div>
+      </div>
+
+      <div
+        class="border border-secondary rounded mb-3 p-3 bg-body-tertiary bg-dark text-white"
+      >
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-bold">51 Elm Street</div>
+          <span class="badge bg-info text-dark">Active</span>
+        </div>
+        <small class="text-muted d-block mb-2">Austin, TX 73301</small>
+        <div><strong>Phase:</strong> Marketing</div>
+        <div><strong>Type:</strong> Listing</div>
+        <div><strong>Client:</strong> Ava Patel</div>
+        <div><strong>Commission:</strong> —</div>
+        <div><strong>Close Date:</strong> —</div>
+        <div class="text-warning mt-2 d-flex align-items-center">
+          <i class="bi bi-exclamation-triangle me-2"></i>Action Required: Add
+          listing description
+        </div>
+        <div class="mt-3">
+          <button class="btn btn-outline-light btn-sm">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const transactionsExist = true;
+  document.getElementById("transactions-table").style.display =
+    transactionsExist ? "block" : "none";
+  document.getElementById("no-transactions").style.display = transactionsExist
+    ? "none"
+    : "block";
+</script>

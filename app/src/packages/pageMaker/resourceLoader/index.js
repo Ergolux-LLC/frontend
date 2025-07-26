@@ -1,109 +1,129 @@
-/* src/packages/pageMaker/resourceLoader/index.js
- *
- * Centralized resource loader for SPA runtime.
- *
- * Key points
- * ----------
- * • One named export:  import { Loader } from "./resourceLoader/index.js";
- * • Understands  <scriptTag>  OR  full https:// URLs  in before/after scripts
- * • Supports speculative preload queues and CDN assets (Bootstrap, etc.)
- */
+/* src/packages/pageMaker/resourceLoader/index.js */
 
 import { getScriptByTag } from "../registry/index.js";
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  Internal State                                                          */
-/* ────────────────────────────────────────────────────────────────────────── */
-
-const cache = new Map(); // key ➜ resolved value | Promise
-let registry = {}; // merged YAML + flattened entries
+const cache = new Map();
+let registry = {};
 
 const queue = { high: [], medium: [], low: [] };
-const active = new Set(); // de‑dupe scheduled keys
-let running = false; // runQueue re‑entrancy guard
+const active = new Set();
+let running = false;
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  Cache helpers                                                           */
-/* ────────────────────────────────────────────────────────────────────────── */
+export const hasCached = (k) => {
+  const result = cache.has(k);
+  console.log(`[Cache] hasCached(${k}) ➜ ${result}`);
+  return result;
+};
 
-export const hasCached = (k) => cache.has(k);
-export const getCached = (k) => cache.get(k);
-export const setCached = (k, v) => cache.set(k, v);
-export const clear = () => cache.clear();
+export const getCached = (k) => {
+  const value = cache.get(k);
+  console.log(`[Cache] getCached(${k}) ➜`, value);
+  return value;
+};
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  Primitive loader for arbitrary URLs                                      */
-/* ────────────────────────────────────────────────────────────────────────── */
+export const setCached = (k, v) => {
+  cache.set(k, v);
+  console.log(`[Cache] setCached(${k})`);
+};
+
+export const clear = () => {
+  cache.clear();
+  console.log(`[Cache] clear() called`);
+};
 
 function internalLoad(url) {
+  console.log(`[Loader] internalLoad(${url})`);
   const clean = url.split("?")[0];
   const ext = clean.split(".").pop().toLowerCase();
 
-  /* JS ––– */
   if (ext === "js") {
     return new Promise((resolve, reject) => {
       const s = document.createElement("script");
       s.src = url;
       s.async = true;
-      s.onload = () => resolve(s);
-      s.onerror = reject;
+      s.onload = () => {
+        console.log(`[Loader] JS loaded: ${url}`);
+        resolve(s);
+      };
+      s.onerror = (e) => {
+        console.error(`[Loader] JS load failed: ${url}`, e);
+        reject(e);
+      };
       document.head.appendChild(s);
     });
   }
 
-  /* CSS ––– */
   if (ext === "css") {
     return new Promise((resolve, reject) => {
       const l = document.createElement("link");
       l.rel = "stylesheet";
       l.href = url;
-      l.onload = () => resolve(l);
-      l.onerror = reject;
+      l.onload = () => {
+        console.log(`[Loader] CSS loaded: ${url}`);
+        resolve(l);
+      };
+      l.onerror = (e) => {
+        console.error(`[Loader] CSS load failed: ${url}`, e);
+        reject(e);
+      };
       document.head.appendChild(l);
     });
   }
 
-  /* images ––– */
   if (["png", "jpg", "jpeg", "gif", "webp", "svg"].includes(ext)) {
     return new Promise((resolve, reject) => {
       const i = new Image();
       i.src = url;
-      i.onload = () => resolve(i);
-      i.onerror = reject;
+      i.onload = () => {
+        console.log(`[Loader] Image loaded: ${url}`);
+        resolve(i);
+      };
+      i.onerror = (e) => {
+        console.error(`[Loader] Image load failed: ${url}`, e);
+        reject(e);
+      };
     });
   }
 
-  /* video or fall‑back fetch ––– */
-  return fetch(url).then((r) => {
-    if (!r.ok) throw new Error("Failed to load resource: " + r.status);
-    return r;
-  });
+  return fetch(url)
+    .then((r) => {
+      console.log(`[Loader] fetch(${url}) ➜ status: ${r.status}`);
+      if (!r.ok) throw new Error("Failed to load resource: " + r.status);
+      return r;
+    })
+    .catch((err) => {
+      console.error(`[Loader] Fetch failed: ${url}`, err);
+      throw err;
+    });
 }
 
-/* expose for dev‑console tinkering */
 if (typeof global !== "undefined") global.__internalLoad = internalLoad;
-
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  Priority queue                                                          */
-/* ────────────────────────────────────────────────────────────────────────── */
 
 function schedule(entry, prio) {
   const key =
     typeof entry === "string"
       ? entry
       : `${entry.type}:${entry.tag || entry.url}`;
-
-  if (hasCached(key) || active.has(key)) return;
-  if (!["high", "medium", "low"].includes(prio))
+  if (hasCached(key) || active.has(key)) {
+    console.log(`[Queue] Skip scheduling ${key} (cached or active)`);
+    return;
+  }
+  if (!["high", "medium", "low"].includes(prio)) {
+    console.error(`[Queue] Invalid priority "${prio}"`);
     throw new Error(`[Loader] invalid priority "${prio}"`);
-
+  }
   queue[prio].push(entry);
   active.add(key);
+  console.log(`[Queue] Scheduled ${key} with priority ${prio}`);
 }
 
 async function runQueue() {
-  if (running) return;
+  if (running) {
+    console.log("[Queue] runQueue() already running");
+    return;
+  }
   running = true;
+  console.log("[Queue] runQueue() started");
 
   while (queue.high.length || queue.medium.length || queue.low.length) {
     for (const level of ["high", "medium", "low"]) {
@@ -114,6 +134,7 @@ async function runQueue() {
             ? entry
             : `${entry.type}:${entry.tag || entry.url}`;
         active.delete(key);
+        console.log(`[Queue] Processing ${key} from ${level}`);
 
         try {
           let p;
@@ -131,38 +152,43 @@ async function runQueue() {
           }
           setCached(key, p);
           await p;
+          console.log(`[Queue] Loaded ${key}`);
         } catch (err) {
-          console.error("[Loader] failed:", entry, err);
+          console.error("[Queue] Failed loading:", entry, err);
         }
       }
     }
     await new Promise((r) => setTimeout(r, 0));
   }
 
+  console.log("[Queue] runQueue() complete");
   running = false;
 }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  View‑scoped resource loader                                             */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 async function loadResourceForView(viewName) {
+  console.log(`[Loader] loadResourceForView(${viewName})`);
   const list = registry[viewName];
   if (!Array.isArray(list)) throw new Error(`No list for view ${viewName}`);
 
   const promises = list.map((e) => {
     const k = typeof e === "string" ? e : `${e.type}:${e.tag || e.url}`;
-    if (hasCached(k)) return getCached(k);
+    if (hasCached(k)) {
+      console.log(`[Loader] Re-using cached ${k}`);
+      return getCached(k);
+    }
 
     let p;
-    if (typeof e === "string") p = internalLoad(e);
-    else if (e.type === "script") {
+    if (typeof e === "string") {
+      p = internalLoad(e);
+    } else if (e.type === "script") {
       const reg = getScriptByTag(e.tag);
       p =
         typeof reg?.module?.mount === "function"
           ? reg.module.mount()
           : Promise.resolve();
-    } else p = Promise.resolve();
+    } else {
+      p = Promise.resolve();
+    }
 
     setCached(k, p);
     return p;
@@ -171,15 +197,12 @@ async function loadResourceForView(viewName) {
   return Promise.all(promises);
 }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  Before / after scripts helpers                                          */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 function _isUrl(str) {
   return str.startsWith("http://") || str.startsWith("https://");
 }
 
 async function _loadScriptEntry(str, phase) {
+  console.log(`[Loader] _loadScriptEntry(${str}, ${phase})`);
   if (typeof str !== "string")
     throw new Error(`[Loader] ${phase}: entry must be string`);
 
@@ -200,6 +223,7 @@ async function _loadScriptEntry(str, phase) {
 }
 
 async function runBeforeScripts(view) {
+  console.log(`[Loader] runBeforeScripts(${view})`);
   const meta = registry.views.find((v) => v.view_name === view);
   if (!meta?.before_scripts?.length) return { ok: true, scripts: [] };
 
@@ -216,6 +240,7 @@ async function runBeforeScripts(view) {
 }
 
 async function runAfterScripts(view) {
+  console.log(`[Loader] runAfterScripts(${view})`);
   const meta = registry.views.find((v) => v.view_name === view);
   if (!meta?.after_scripts?.length) return { ok: true, scripts: [] };
 
@@ -231,25 +256,18 @@ async function runAfterScripts(view) {
   return { ok: true, scripts: loaded };
 }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  Main view‑loader orchestration                                          */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 async function loadView(viewName) {
+  console.log(`[Loader] loadView(${viewName})`);
   if (!registry[viewName]) throw new Error(`Unknown view: ${viewName}`);
 
   const all = Object.keys(registry).filter((k) => k !== "views");
   const meta = registry.views.find((v) => v.view_name === viewName) || {};
 
-  // current (high)
   registry[viewName].forEach((e) => schedule(e, "high"));
-
-  // related (medium)
   (meta.related_views || []).forEach((rel) => {
     (registry[rel] || []).forEach((e) => schedule(e, "medium"));
   });
 
-  // everything else (low)
   for (const v of all) {
     if (v === viewName) continue;
     if ((meta.related_views || []).includes(v)) continue;
@@ -259,12 +277,9 @@ async function loadView(viewName) {
   return runQueue();
 }
 
-/* ────────────────────────────────────────────────────────────────────────── */
-/*  Registry Initializer                                                    */
-/* ────────────────────────────────────────────────────────────────────────── */
-
 export const Loader = {
   init(reg) {
+    console.log("[Loader] init() called");
     registry = reg;
 
     if (!Array.isArray(reg.views)) return;
@@ -275,7 +290,7 @@ export const Loader = {
 
       if (view.page) registry[key].push(view.page);
       if (Array.isArray(view.fragments)) {
-        /* renderer fetches fragments */
+        console.log(`[Loader] Fragments ignored for ${key}`);
       }
 
       const pushTagOrUrl = (arr) => {
@@ -302,20 +317,20 @@ export const Loader = {
 
   loadView,
   preload(url) {
+    console.log(`[Loader] preload(${url})`);
     if (!hasCached(url)) schedule(url, "low");
   },
 
   getCached,
   handleExternalRequest({ viewName }) {
+    console.log(`[Loader] handleExternalRequest(${viewName})`);
     return Loader.loadView(viewName);
   },
 
-  /* public helpers */
   loadResource: internalLoad,
   loadResourcesForView: loadResourceForView,
   runBeforeScripts,
   runAfterScripts,
 };
 
-/* named re‑exports for tests / debugging */
 export { schedule, runQueue, queue };
